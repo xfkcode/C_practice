@@ -32,9 +32,9 @@ int main()
 {
 	int arr[10] = {0,1,2,3,4,5,6,7,8,9};
 	int sz = sizeof(arr) / sizeof(arr[0]);
-	//Init(arr, sz);//³õÊ¼»¯ÎªÈ«0
-	Print(arr, sz);//´òÓ¡
-	Reverse(arr, sz);//ÄæĞò
+	//Init(arr, sz);//åˆå§‹åŒ–ä¸ºå…¨0
+	Print(arr, sz);//æ‰“å°
+	Reverse(arr, sz);//é€†åº
 	Print(arr, sz);
 	return 0;
 }
