@@ -1,5 +1,5 @@
 #include<stdio.h>
-//½»»»Êı×é
+//äº¤æ¢æ•°ç»„
 void Swap(int arr1[], int arr2[], int sz)
 {
 	int i = 0;
