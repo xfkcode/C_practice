@@ -1,5 +1,5 @@
 #include<stdio.h>
-//用指针打印数组
+//鎸囬拡鎵撳嵃鏁扮粍
 void print(int* p, int sz)
 {
 	int i = 0;
