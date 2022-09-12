@@ -1,6 +1,6 @@
 #include<stdlib.h>
 #include<stdio.h>
-//qsort函数排序结构体数组
+//qsort搴撳嚱鏁板疄鐜扮粨鏋勪綋鏁扮粍鎺掑簭
 struct Stu
 {
 	char name[20];
