@@ -42,6 +42,8 @@ int main()
 			ShowContact(&con);
 			break;
 		case EXIT:
+			//释放空间
+			DestroyContact(&con);
 			printf("退出通讯录\n");
 			break;
 		default:

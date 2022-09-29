@@ -1,35 +1,54 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 
 #include "contact.h"
+#include<stdlib.h>
 
 void InitContcat(struct Contact* ps)
 {
-	memset(ps->data, 0, sizeof(ps->data));
+	ps->data = (struct PeoInfo*)malloc(3 * sizeof(struct PeoInfo));
+	if (ps->data == NULL)
+	{
+		return;
+	}
 	ps->size = 0;
+	ps->capacity = DEFAULT_SZ;
 }
 
+void CheckCapacity(struct Contact* ps)
+{
+	if (ps->size == ps->capacity)
+	{
+		//增容
+		struct PeoInfo* ptr = realloc(ps->data, (ps->capacity + 2) * sizeof(struct PeoInfo));
+		if (ptr != NULL)
+		{
+			ps->data = ptr;
+			ps->capacity += 2;
+			printf("增容成功\n");
+		}
+		else
+		{
+			printf("增容失败\n");
+		}
+	}
+}
 void AddContact(struct Contact* ps)
 {
-	if (ps->size == MAX)
-	{
-		printf("内存已满\n");
-	}
-	else
-	{
-		printf("请输入名字:>");
-		scanf("%s", ps->data[ps->size].name);
-		printf("请输入年龄:>");
-		scanf("%d", &(ps->data[ps->size].age));
-		printf("请输入性别:>");
-		scanf("%s", ps->data[ps->size].sex);
-		printf("请输入电话:>");
-		scanf("%s", ps->data[ps->size].tele);
-		printf("请输入地址:>");
-		scanf("%s", ps->data[ps->size].addr);
+	CheckCapacity(ps);//检查容量是否满
+	
+	printf("请输入名字:>");
+	scanf("%s", ps->data[ps->size].name);
+	printf("请输入年龄:>");
+	scanf("%d", &(ps->data[ps->size].age));
+	printf("请输入性别:>");
+	scanf("%s", ps->data[ps->size].sex);
+	printf("请输入电话:>");
+	scanf("%s", ps->data[ps->size].tele);
+	printf("请输入地址:>");
+	scanf("%s", ps->data[ps->size].addr);
 
-		ps->size++;
-		printf("添加成功\n");
-	}
+	ps->size++;
+	printf("添加成功\n");
 }
 
 void ShowContact(const struct Contact* ps)
@@ -139,4 +158,8 @@ void ModifyContact(struct Contact* ps)
 	}
 }
 
-
+void DestroyContact(struct Contact* ps)
+{
+	free(ps->data);
+	ps->data = NULL;
+}
