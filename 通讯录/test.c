@@ -6,7 +6,7 @@ void menu()
 	printf("***************************\n");
 	printf("**  1.add      2.del     **\n");
 	printf("**  3.search   4.modify  **\n");
-	printf("****      5.show       ****\n");
+	printf("**  5.show     6.save    **\n");
 	printf("****      0.exit       ****\n");
 	printf("***************************\n");
 }
@@ -41,7 +41,11 @@ int main()
 		case SHOW:
 			ShowContact(&con);
 			break;
+		case SAVE:
+			SaveConcat(&con);
+			break;
 		case EXIT:
+			SaveConcat(&con);
 			//释放空间
 			DestroyContact(&con);
 			printf("退出通讯录\n");

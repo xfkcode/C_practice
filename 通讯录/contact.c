@@ -3,15 +3,38 @@
 #include "contact.h"
 #include<stdlib.h>
 
+void CheckCapacity(struct Contact* ps);
+void LoadConcat(struct Contact* ps)
+{
+	struct PeoInfo tmp = { 0 };
+	FILE* pfr = fopen("contact.dat", "rb");
+	if (pfr == NULL)
+	{
+		printf("LoadConcat:%s\n", strerror(errno));
+		return;
+	}
+	//读取文件
+	while (fread(&tmp, sizeof(struct PeoInfo), 1, pfr))
+	{
+		CheckCapacity(ps);
+		ps->data[ps->size] = tmp;
+		ps->size++;
+	}
+
+	fclose(pfr);
+	pfr = NULL;
+}
 void InitContcat(struct Contact* ps)
 {
-	ps->data = (struct PeoInfo*)malloc(3 * sizeof(struct PeoInfo));
+	ps->data = (struct PeoInfo*)malloc(DEFAULT_SZ * sizeof(struct PeoInfo));
 	if (ps->data == NULL)
 	{
 		return;
 	}
 	ps->size = 0;
 	ps->capacity = DEFAULT_SZ;
+	//从文件载入数据
+	LoadConcat(ps);
 }
 
 void CheckCapacity(struct Contact* ps)
@@ -162,4 +185,23 @@ void DestroyContact(struct Contact* ps)
 {
 	free(ps->data);
 	ps->data = NULL;
+}
+
+void SaveConcat(struct Contact* ps)
+{
+	FILE* pfw = fopen("contact.dat", "wb");
+	if (pfw == NULL)
+	{
+		printf("SaveConcat:%s\n", strerror(errno));
+		return;
+	}
+	//写通讯录数据到文件
+	int i = 0;
+	for (i = 0;i < ps->size;i++)
+	{
+		fwrite(&(ps->data[i]), sizeof(struct PeoInfo), 1, pfw);
+	}
+
+	fclose(pfw);
+	pfw = NULL;
 }

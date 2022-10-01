@@ -2,6 +2,8 @@
 
 #include<stdio.h>
 #include<string.h>
+#include<errno.h>
+#include<stdlib.h>
 
 #define DEFAULT_SZ 3
 #define MAX_NAME 20
@@ -16,7 +18,8 @@ enum Option
 	DEL,
 	SEARCH,
 	MODIFY,
-	SHOW
+	SHOW,
+	SAVE
 };
 struct PeoInfo
 {
@@ -43,4 +46,5 @@ void DelContact(struct Contact* ps);
 void SearchContact(const struct Contact* ps);
 void ModifyContact(struct Contact* ps);
 void DestroyContact(struct Contact* ps);
-
+void SaveConcat(struct Contact* ps);
+void LoadConcat(struct Contact* ps);
